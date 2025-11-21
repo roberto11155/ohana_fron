@@ -1,0 +1,171 @@
+/* src/components/ProductModal.module.css */
+
+/* --- 1. Keyframes para animación --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- 2. Variables de Color (Para consistencia) --- */
+.modalBackdrop {
+  --color-primary: #005fcc;
+  --color-primary-light: #e6f0ff;
+  --color-success: #4CAF50;
+  --color-success-dark: #43a047;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #334155;
+  --color-text-muted: #64748b;
+  --font-sans: 'Nunito', sans-serif;
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* --- Estilo del Backdrop --- */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* MEJORA: Transparencia un poco más sutil */
+  background-color: rgba(10, 20, 40, 0.5); 
+  backdrop-filter: blur(4px); /* MEJORA: Efecto "vidrio" profesional */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: var(--font-sans);
+  
+  /* NUEVO: Animación de entrada */
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modalContent {
+  background: var(--color-surface);
+  /* MEJORA: Padding ligeramente ajustado */
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 500px;
+  z-index: 1001;
+  
+  /* NUEVO: Animación de entrada */
+  animation: slideInUp 0.3s ease-out;
+  
+  /* NUEVO: Para modals largos en pantallas pequeñas */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 600; /* MEJORA: Ligeramente más suave que 700 */
+  font-size: 0.8rem; /* MEJORA: Etiqueta más pequeña, estilo profesional */
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+  /* MEJORA: Estilo de etiqueta coherente */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+  background-color: var(--color-surface);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* MEJORA: Estado de foco mucho más nítido y accesible */
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem; /* MEJORA: Un poco más de espacio */
+}
+
+.formActions {
+  margin-top: 2rem;
+  padding-top: 1.5rem; /* NUEVO: Padding para separar */
+  border-top: 1px solid var(--color-border); /* NUEVO: Línea divisora */
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* --- Botones (Estilo coherente) --- */
+
+.cancelButton, .saveButton {
+  /* Estilos base de botón */
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem; /* MEJORA: Tamaño de fuente unificado */
+  padding: 0.6rem 1.2rem; /* MEJORA: Padding unificado */
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+/* NUEVO: Estado de foco para botones */
+.cancelButton:focus-visible,
+.saveButton:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+.cancelButton {
+  background-color: #f0f4f8; /* MEJORA: Gris más sutil */
+  color: var(--color-text);
+  border-color: #f0f4f8;
+}
+.cancelButton:hover {
+  background-color: var(--color-border);
+  border-color: var(--color-border);
+}
+
+.saveButton {
+  background-color: var(--color-success);
+  color: var(--color-surface);
+  border-color: var(--color-success);
+}
+.saveButton:hover {
+  background-color: var(--color-success-dark);
+  border-color: var(--color-success-dark);
+}

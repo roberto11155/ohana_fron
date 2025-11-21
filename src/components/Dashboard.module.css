@@ -1,0 +1,225 @@
+/* src/components/Dashboard.module.css */
+
+/* === 1. Variables y Contenedor Principal === */
+.dashboardContainer {
+  /* --- FIX PANTALLA COMPLETA (Crucial para quitar el borde blanco) --- */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw; /* 100% del ancho de la ventana visual */
+  height: 100vh; /* 100% del alto */
+  overflow-y: auto; /* Permite hacer scroll si el contenido es largo */
+  overflow-x: hidden; /* Evita scroll horizontal */
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  /* --------------------------------------------------------------- */
+
+  --color-primary: #005fcc;
+  --color-primary-light: #e6f0ff; /* Agregado para focus */
+  --color-success: #4CAF50;
+  --color-danger: #d32f2f;
+  --color-warning: #FF9800;
+  --color-info: #00bcd4;
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #334155;
+  --color-text-muted: #64748b;
+  --font-sans: 'Nunito', sans-serif;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --radius-lg: 12px;
+  
+  /* --- CAMBIO AQUÍ: Fondo de playa --- */
+  background-color: var(--color-bg); /* Color base */
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2)), /* Tinte sutil */
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop'); /* Imagen de playa */
+  background-size: cover;
+  background-position: center;
+  /* ------------------------------------ */
+
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  box-sizing: border-box;
+}
+
+/* === 2. Navbar === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem; /* Ajustado para mejor proporción */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para el efecto blur */
+  backdrop-filter: blur(10px); /* Efecto cristal esmerilado */
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid rgba(255,255,255,0.5); /* Borde más suave */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  height: 50px; /* Tamaño balanceado para navbar */
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logoutButton {
+  padding: 0.7rem 1.5rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  background-color: var(--color-danger);
+  color: var(--color-surface);
+  border: none;
+  box-shadow: 0 2px 5px rgba(211, 47, 47, 0.3);
+}
+
+.logoutButton:hover { 
+  background-color: #b71c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(211, 47, 47, 0.4);
+}
+
+/* === 3. Contenido Principal === */
+.mainContent {
+  max-width: 1200px; /* Ancho máximo del contenido para que no se estire demasiado en pantallas gigantes */
+  width: 100%; /* Asegura que ocupe el espacio disponible */
+  margin: 0 auto; /* Centra el contenido horizontalmente */
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+}
+
+.mainContent h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1f2937; /* Color oscuro para contraste con el fondo claro */
+  margin: 0;
+  border-bottom: 2px solid rgba(255,255,255,0.5); /* Línea más suave */
+  padding-bottom: 1rem;
+}
+
+.mainContent h2 + p {
+  font-size: 1.2rem;
+  color: #4b5563; /* Color de texto para el párrafo */
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+/* Grid para las tarjetas */
+.grid {
+  display: grid;
+  /* Responsive: 1 columna en móvil, 2 en pantallas medianas */
+  grid-template-columns: 1fr; 
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr; /* 2 columnas en tablet/PC */
+  }
+}
+
+/* === 4. TARJETA HORIZONTAL (Estilo Solicitado) === */
+.card {
+  background: rgba(255, 255, 255, 0.95); /* Fondo semitransparente para las tarjetas */
+  backdrop-filter: blur(15px); /* Efecto blur para que el fondo de playa se vea a través */
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255,255,255,0.6); /* Borde más brillante */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto hover general */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255,255,255,0.8); /* Borde más visible en hover */
+}
+
+/* Ícono grande */
+.cardIcon {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* Círculo perfecto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: #ffffff;
+  transition: transform 0.3s ease-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra más pronunciada */
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Contenido de la tarjeta */
+.cardContent {
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1f2937; /* Color oscuro para el título */
+  margin: 0 0 0.5rem 0;
+}
+
+.card p {
+  color: #4b5563; /* Color de texto para el párrafo */
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+/* === Colores Temáticos === */
+
+/* PRIMARIA (Productos) */
+.cardPrimary .cardIcon { background: linear-gradient(135deg, #8b5cf6, #ec4899); } /* Colores de playa */
+.cardPrimary:hover { border-left: 5px solid #8b5cf6; }
+
+/* SUCCESS (Venta) */
+.cardSuccess .cardIcon { background: linear-gradient(135deg, #10b981, #34d399); } /* Verde más brillante */
+.cardSuccess:hover { border-left: 5px solid #10b981; }
+
+/* WARNING (Reportes) */
+.cardWarning .cardIcon { background: linear-gradient(135deg, #f59e0b, #fbbf24); } /* Naranja cálido */
+.cardWarning:hover { border-left: 5px solid #f59e0b; }
+
+/* INFO (Deudores) */
+.cardInfo .cardIcon { background: linear-gradient(135deg, #06b6d4, #22d3ee); } /* Azul turquesa */
+.cardInfo:hover { border-left: 5px solid #06b6d4; }

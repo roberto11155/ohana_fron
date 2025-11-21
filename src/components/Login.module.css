@@ -1,0 +1,187 @@
+/* src/components/Login.module.css */
+
+/* --- 1. CONTENEDOR PRINCIPAL --- */
+.loginContainer {
+  /* Fixed asegura que ocupe la pantalla ignorando márgenes del padre */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  
+  display: flex;
+  overflow: hidden; /* Evita barras de scroll */
+  font-family: 'Nunito', sans-serif;
+  background-color: #ffffff;
+  z-index: 9999; /* Se pone encima de todo */
+}
+
+/* --- 2. LADO IZQUIERDO (Formulario) --- */
+.formSection {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #ffffff;
+  position: relative;
+  z-index: 10;
+}
+
+.formBox {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Header */
+.header { text-align: center; margin-bottom: 1rem; }
+
+.imageLogo {
+  max-width: 160px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s;
+}
+.imageLogo:hover { transform: scale(1.05) rotate(-3deg); }
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #718096;
+  margin-top: 0.5rem;
+}
+
+/* Inputs y Botones */
+.loginForm { display: contents; }
+.inputGroup { display: flex; flex-direction: column; width: 100%; gap: 0.5rem; }
+
+.label { 
+  font-weight: 700; 
+  color: #4a5568; 
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 50px; /* Input redondo */
+  font-size: 1rem;
+  background: #f7fafc;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  background: #fff;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.2);
+}
+
+.button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #0061ff 0%, #60efff 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 97, 255, 0.3);
+  transition: transform 0.2s;
+}
+.button:hover { transform: translateY(-2px); }
+.button:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; }
+
+.error {
+  background: #fff5f5;
+  color: #c53030;
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  border: 1px solid #feb2b2;
+}
+
+.toggleLink {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #0061ff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.toggleLink:hover { text-decoration: underline; }
+
+/* --- 3. LADO DERECHO (Imagen con corte diagonal) --- */
+.imageSection {
+  flex: 1.4; 
+  display: none; /* Oculto en celular */
+  position: relative;
+  height: 100vh;
+  
+  /* IMAGEN DE FONDO */
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  
+  align-items: center;
+  justify-content: center;
+  
+  /* El Corte Diagonal */
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+  margin-left: -60px; /* Superposición sobre el blanco */
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 97, 255, 0.8), rgba(96, 239, 255, 0.5));
+  z-index: 1;
+}
+
+.glassCard {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  text-align: center;
+  color: white;
+  max-width: 500px;
+}
+
+.brandingTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.brandingText {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* --- 4. RESPONSIVE --- */
+@media (min-width: 900px) {
+  .imageSection { display: flex; }
+}

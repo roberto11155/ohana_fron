@@ -1,0 +1,351 @@
+/* src/components/Deudores.module.css */
+
+.pageContainer {
+  /* --- Paleta de Colores --- */
+  --color-primary: #8b5cf6;       /* Violeta Vibrante */
+  --color-primary-dark: #6d28d9;  /* Violeta Profundo */
+  --color-primary-light: #f3e8ff; /* Lavanda Suave */
+  
+  --color-secondary: #ec4899;     /* Rosa Fucsia */
+  --color-secondary-dark: #be185d;
+  
+  --color-success: #10b981;       /* Verde Ment */
+  --color-success-dark: #047857;
+  
+  --color-danger: #ef4444;        /* Rojo Coral */
+  --color-danger-light: #fee2e2;
+  
+  --color-warning: #f59e0b;       /* Naranja */
+  
+  --color-bg: #f5f3ff;            /* Fondo base */
+  
+  --color-text: #1f2937;          /* Gris oscuro */
+  --color-text-muted: #6b7280;    /* Gris medio */
+
+  --font-sans: 'Nunito', 'Poppins', sans-serif;
+
+  --shadow-sm: 0 2px 4px rgba(139, 92, 246, 0.05);
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* --- FIX PANTALLA COMPLETA --- */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  /* --- FONDO DE PLAYA --- */
+  background-color: var(--color-bg);
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop');
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================ */
+/* 2. NAVBAR */
+/* ============================================================ */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(255,255,255,0.6);
+  flex-shrink: 0;
+  z-index: 100;
+}
+.imageLogo {
+  max-width: 160px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s;
+}
+.imageLogo:hover { transform: scale(1.05) rotate(-3deg); }
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem; /* Emoji size */
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0;
+  color: var(--color-primary-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.backButton {
+  padding: 0.7rem 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: white;
+  background: var(--color-primary);
+  border: none;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+  transition: all 0.2s;
+}
+.backButton:hover { 
+  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+}
+
+/* ============================================================ */
+/* 3. CONTENIDO PRINCIPAL */
+/* ============================================================ */
+
+.mainContent {
+  flex-grow: 1;
+  padding: 2rem 3rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 5rem;
+}
+
+/* ============================================================ */
+/* 4. FORMULARIO (Adaptado al estilo Glass) */
+/* ============================================================ */
+
+.formCard {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formTitle {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-bottom: 2px solid var(--color-primary-light);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.input {
+  padding: 12px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+
+.btnSave {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s;
+  height: 48px; /* Match input height */
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+
+.btnSave:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================================ */
+/* 5. GRID DE TARJETAS (DEUDORES) */
+/* ============================================================ */
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.debtorCard {
+  background: rgba(255, 255, 255, 0.85); 
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid rgba(255,255,255,0.6);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.debtorCard:hover {
+  transform: translateY(-5px);
+  background: #ffffff;
+  box-shadow: 0 15px 30px rgba(139, 92, 246, 0.15);
+  border-color: var(--color-primary-light);
+}
+
+.cardHeader {
+  padding: 1.2rem;
+  background: linear-gradient(to right, rgba(243, 232, 255, 0.6), transparent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--color-primary-light), #e0e7ff);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.debtInfo {
+  text-align: right;
+}
+
+.debtAmount {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-danger);
+}
+
+.cardBody {
+  padding: 1.2rem;
+  flex-grow: 1;
+}
+
+.debtorName {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0 0 0.5rem 0;
+}
+
+.debtDesc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  background: #f3f4f6;
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.cardFooter {
+  padding: 1rem 1.2rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.5);
+}
+
+.dateInfo {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.btnPay {
+  background-color: #dcfce7;
+  color: var(--color-success-dark);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnPay:hover {
+  background-color: var(--color-success);
+  color: white;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+/* --- NOTIFICACIÓN --- */
+.notification {
+  position: fixed;
+  top: 80px; /* Debajo del navbar */
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: slideIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.success { background: var(--color-success); }
+.warning { background: var(--color-warning); }
+
+@keyframes slideIn {
+  from { transform: translateX(120%); }
+  to { transform: translateX(0); }
+}
+
+.loading { text-align: center; padding: 2rem; font-weight: bold; color: var(--color-primary); }
