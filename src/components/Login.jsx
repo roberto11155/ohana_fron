@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from './Login.module.css';
-import logoOhana from '../assets/ohana1.jpg'; // Tu logo
+import logoOhana from '../assets/ohana1.jpg'; 
 import { Link } from 'react-router-dom';
 
 function Login({ onLoginSuccess }) {
@@ -16,18 +16,22 @@ function Login({ onLoginSuccess }) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
+      // CORRECCIÓN FINAL: La ruta correcta es /api/auth/login
+      const response = await axios.post('https://ohana-back-production.up.railway.app/api/auth/login', {
         usuario: usuario,
         contrasena: contrasena
       });
+      
       localStorage.setItem('authToken', response.data.token); 
       onLoginSuccess();
+      
     } catch (err) {
       console.error('Error de login:', err);
+      // Si el error es 404, es que la ruta sigue mal. Si es 401, es contraseña mal. Si es 500, es base de datos.
       if (err.response && err.response.status === 401) {
-        setError('Credenciales incorrectas.');
+        setError('Usuario o contraseña incorrectos.');
       } else {
-        setError('Error de conexión.');
+        setError('Error de conexión o usuario no encontrado.');
       }
       setIsLoading(false);
     }
@@ -36,7 +40,6 @@ function Login({ onLoginSuccess }) {
   return (
     <div className={styles.loginContainer}>
       
-      {/* --- IZQUIERDA: FORMULARIO --- */}
       <div className={styles.formSection}>
         <div className={styles.formBox}>
           <div className={styles.header}>
@@ -86,11 +89,8 @@ function Login({ onLoginSuccess }) {
         </div>
       </div>
 
-      {/* --- DERECHA: IMAGEN CON CORTE DIAGONAL --- */}
       <div className={styles.imageSection}>
          <div className={styles.overlay}></div>
-         
-         {/* Tarjeta flotante con efecto vidrio */}
          <div className={styles.glassCard}>
             <h1 className={styles.brandingTitle}>Sistema Ohana</h1>
             <p className={styles.brandingText}>

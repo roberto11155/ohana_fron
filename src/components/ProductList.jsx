@@ -18,11 +18,15 @@ function ProductList({ onLogout }) {
 
   const token = localStorage.getItem('authToken');
 
+  // URL DEL BACKEND EN RAILWAY
+  const API_URL = 'https://ohana-back-production.up.railway.app/api/productos';
+
   useEffect(() => {
     const fetchProductos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:3000/api/productos', {
+        // CAMBIO 1: URL actualizada
+        const response = await axios.get(API_URL, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (Array.isArray(response.data)) {
@@ -83,10 +87,12 @@ function ProductList({ onLogout }) {
     const headers = { Authorization: `Bearer ${token}` };
     try {
       if (currentProduct) {
-        const response = await axios.put(`http://localhost:3000/api/productos/${currentProduct.id}`, productData, { headers });
+        // CAMBIO 2: URL actualizada para editar
+        const response = await axios.put(`${API_URL}/${currentProduct.id}`, productData, { headers });
         setProductos(productos.map(p => (p.id === currentProduct.id ? response.data : p)));
       } else {
-        const response = await axios.post('http://localhost:3000/api/productos', productData, { headers });
+        // CAMBIO 3: URL actualizada para crear
+        const response = await axios.post(API_URL, productData, { headers });
         setProductos([...productos, response.data]);
       }
       handleCloseModal();
@@ -99,7 +105,8 @@ function ProductList({ onLogout }) {
   const handleDeleteProduct = async (productId) => {
     if (window.confirm("¿Eliminar producto?")) {
       try {
-        await axios.delete(`http://localhost:3000/api/productos/${productId}`, {
+        // CAMBIO 4: URL actualizada para eliminar
+        await axios.delete(`${API_URL}/${productId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setProductos(productos.filter(p => p.id !== productId));

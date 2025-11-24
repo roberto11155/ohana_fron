@@ -1,9 +1,8 @@
-// src/components/Register.jsx
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Register.module.css'; 
-import logoOhana from '../assets/ohana1.jpg'; // (Asegúrate de que este sea el nombre correcto)
+import logoOhana from '../assets/ohana1.jpg'; 
 
 function Register() {
   const [nombre, setNombre] = useState('');
@@ -28,13 +27,15 @@ function Register() {
     setIsLoading(true);
 
     try {
-      await axios.post('http://localhost:3000/api/auth/register', {
+      // CORRECCIÓN: Cambiamos localhost por tu URL de producción en Railway
+      await axios.post('https://ohana-back-production.up.railway.app/api/auth/register', {
         nombre: nombre,
         email: email,
         usuario: usuario,
         contrasena: contrasena
       });
       
+      // Si sale bien, nos manda al login
       navigate('/login'); 
 
     } catch (err) {
@@ -56,13 +57,10 @@ function Register() {
           
           <img src={logoOhana} alt="Ohana POS Logo" className={styles.imageLogo} />
           
-          {/* --- AQUÍ ESTÁ TU TEXTO ILUSTRATIVO --- */}
-          {/* (Corregí la ortografía de "bienvenido" y "familia") */}
           <h1 className={styles.title}>Crea tu cuenta</h1>
           <p className={styles.subtitle} style={{ lineHeight: '1.5', marginTop: '0.5rem' }}>
             ¡Bienvenido a la familia Ohana! Completa tus datos para unirte y empezar a gestionar tu negocio.
           </p>
-          {/* --- FIN DEL CAMBIO --- */}
 
         </div>
 
